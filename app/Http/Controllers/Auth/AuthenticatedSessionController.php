@@ -19,22 +19,40 @@ class AuthenticatedSessionController extends Controller
     {
         // Check if the user is already authenticated
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            // Check if the authenticated user is an admin
+            if (auth()->user()->is_admin) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('dashboard');
+            }
         }
-    
+
         // If not authenticated, display the login view
         return view('auth.login');
     }
-    
+
 
     /**
      * Handle an incoming authentication request.
      */
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+    //     $request->session()->regenerate();
+    //     return redirect()->intended(RouteServiceProvider::HOME);
+    // }
+
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::HOME);
+
+        // Check if the authenticated user is an admin
+        if (auth()->user()->is_admin) {
+            return redirect()->intended(route('admin.dashboard'));
+        } else {
+            return redirect()->intended(route('dashboard'));
+        }
     }
 
     /**
