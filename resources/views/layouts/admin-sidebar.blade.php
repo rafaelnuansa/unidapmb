@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('admin.daftar.*') ? 'active' : '' }}" href="{{ route('daftar.index') }}">
+                    <a class="nav-link menu-link {{ Route::is('admin.daftar.*') ? 'active' : '' }}" href="{{ route('admin.daftar.index') }}">
                         <i class="bx bxs-dashboard"></i>
                         <span data-key="t-dashboard">Data Registrasi</span>
                     </a>

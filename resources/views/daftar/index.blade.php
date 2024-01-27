@@ -19,9 +19,12 @@
                 <div class="col-md-9 col-12 mb-2">
                     <form action="{{ route('daftar.index') }}" method="GET">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control border-0 shadow-sm" placeholder="Cari Nomor Registrasi" name="search" value="{{ request('search') }}">
-                            <input type="date" class="form-control border-0 shadow-sm" placeholder="Start Date" name="start_date" value="{{ request('start_date') }}">
-                            <input type="date" class="form-control border-0 shadow-sm" placeholder="End Date" name="end_date" value="{{ request('end_date') }}">
+                            <input type="text" class="form-control border-0 shadow-sm"
+                                placeholder="Cari Nomor Registrasi" name="search" value="{{ request('search') }}">
+                            <input type="date" class="form-control border-0 shadow-sm" placeholder="Start Date"
+                                name="start_date" value="{{ request('start_date') }}">
+                            <input type="date" class="form-control border-0 shadow-sm" placeholder="End Date"
+                                name="end_date" value="{{ request('end_date') }}">
                             <button type="submit" class="btn btn-dark">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                                     height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -30,9 +33,9 @@
                                     </path>
                                 </svg>
                             </button>
-                            @if(request('search') || request('start_date') || request('end_date'))
-                        <a href="{{ route('daftar.index') }}" class="btn btn-dark">Reset</a>
-                    @endif
+                            @if (request('search') || request('start_date') || request('end_date'))
+                                <a href="{{ route('daftar.index') }}" class="btn btn-dark">Reset</a>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -80,11 +83,7 @@
                                         <td>{{ $registration->created_at->format('d F Y') }}</td>
                                         <td>{{ $registration->is_verified ? 'Terverifikasi' : 'Belum Terverifikasi' }}</td>
                                         <td class="text-center">
-                                            <a class="btn btn-primary btn-sm me-2"
-                                                href="{{ route('daftar.edit', $registration->id) }}">
-                                                <i class="fa fa-pencil-alt"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                       <a class="btn btn-danger">Cancel</a>
                                         </td>
                                     </tr>
                                 @endforeach

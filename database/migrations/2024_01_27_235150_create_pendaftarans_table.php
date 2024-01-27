@@ -20,11 +20,7 @@ return new class extends Migration
             $table->foreignId('jurusan_2_id')->references('id')->on('jurusans')->cascadeOnDelete()->comment('reference jurusans');
             $table->foreignId('jurusan_3_id')->references('id')->on('jurusans')->cascadeOnDelete()->comment('reference jurusans');
             $table->foreignId('kelas_id')->references('id')->on('kelas')->cascadeOnDelete()->comment('reference kelas');
-
-
-            $table->boolean('is_verified')->default(false);
-            $table->timestamp('verified_at')->nullable();
-
+            $table->enum('status', ['pending', 'verified', 'rejected', 'canceled'])->default('pending');
             $table->boolean('is_cancel')->default(false);
             // Beasiswa
             $table->string('beasiswa_id')->nullable();

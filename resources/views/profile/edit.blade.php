@@ -106,35 +106,35 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">Jalan</label>
-                                        <input type="text" class="form-control" id="jalan" name="jalan" placeholder="Enter Jalan" value="{{ old('jalan', $user->detail->jalan) }}">
+                                        <input type="text" class="form-control" id="jalan" name="jalan" placeholder="Enter Jalan" value="{{ old('jalan', $user->detail->jalan ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="mb-3">
                                         <label class="form-label">RT</label>
-                                        <input type="text" class="form-control" id="rt" name="rt" placeholder="Enter RT" value="{{ old('rt', $user->detail->rt) }}">
+                                        <input type="text" class="form-control" id="rt" name="rt" placeholder="Enter RT" value="{{ old('rt', $user->detail->rt ?? '')}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="mb-3">
                                         <label class="form-label">RW</label>
-                                        <input type="text" class="form-control" id="rw" name="rw" placeholder="Enter RW" value="{{ old('rw', $user->detail->rw) }}">
+                                        <input type="text" class="form-control" id="rw" name="rw" placeholder="Enter RW" value="{{ old('rw', $user->detail->rw ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">Dusun</label>
-                                        <input type="text" class="form-control" id="dusun" name="dusun" placeholder="Enter Dusun" value="{{ old('dusun', $user->detail->dusun) }}">
+                                        <input type="text" class="form-control" id="dusun" name="dusun" placeholder="Enter Dusun" value="{{ old('dusun', $user->detail->dusun ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">Desa</label>
-                                        <input type="text" class="form-control" id="desa" name="desa" placeholder="Enter Desa" value="{{ old('desa', $user->detail->desa) }}">
+                                        <input type="text" class="form-control" id="desa" name="desa" placeholder="Enter Desa" value="{{ old('desa', $user->detail->desa ?? '') }}">
                                     </div>
                                 </div>
 
