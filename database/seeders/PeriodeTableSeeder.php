@@ -25,7 +25,6 @@ class PeriodeTableSeeder extends Seeder
                'end_date' => '2023-01-15',
                'discount_information' => 'Diskon pendaftaran awal tersedia.',
 
-               'is_active' => false,
            ],
            [
                'name' => 'Periode Penerimaan 2 - Semester 1',
@@ -33,15 +32,13 @@ class PeriodeTableSeeder extends Seeder
                'start_date' => '2023-01-16',
                'end_date' => '2023-01-31',
                'discount_information' => 'Diskon terbatas untuk pendaftaran terlambat.',
-               'is_active' => false,
            ],
            [
                'name' => 'Periode Penerimaan 1 - Semester 2',
                'semester_id' => $semesterIds[1],
-               'start_date' => '2023-06-01',
-               'end_date' => '2023-06-15',
+               'start_date' => '2024-01-01',
+               'end_date' => '2024-04-15',
                'discount_information' => 'Diskon pendaftaran awal tersedia.',
-               'is_active' => true,
            ],
            // Tambahkan lebih banyak periode sesuai kebutuhan
        ];

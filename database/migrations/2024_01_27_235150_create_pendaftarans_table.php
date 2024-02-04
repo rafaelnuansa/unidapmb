@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->comment('reference users');
             $table->string('nomor_registrasi')->unique();
             $table->foreignId('periode_id')->references('id')->on('periodes')->cascadeOnDelete()->comment('reference periods');
+            $table->foreignId('jenjang_id')->references('id')->on('jenjangs')->cascadeOnDelete()->comment('reference jenjangs');
             $table->foreignId('jurusan_1_id')->references('id')->on('jurusans')->cascadeOnDelete()->comment('reference jurusans');
             $table->foreignId('jurusan_2_id')->references('id')->on('jurusans')->cascadeOnDelete()->comment('reference jurusans');
             $table->foreignId('jurusan_3_id')->references('id')->on('jurusans')->cascadeOnDelete()->comment('reference jurusans');

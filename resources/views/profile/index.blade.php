@@ -64,49 +64,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3">Info</h5>
-                                        <div class="table-responsive">
-                                            <table class="table table-borderless mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <th class="ps-0" scope="row">
-                                                            Full Name :
-                                                        </th>
-                                                        <td class="text-muted">Anna Adame</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="ps-0" scope="row">Mobile :</th>
-                                                        <td class="text-muted">+(1) 987 6543</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="ps-0" scope="row">E-mail :</th>
-                                                        <td class="text-muted">
-                                                            daveadame@velzon.com
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="ps-0" scope="row">
-                                                            Location :
-                                                        </th>
-                                                        <td class="text-muted">
-                                                            California, United States
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="ps-0" scope="row">
-                                                            Joining Date
-                                                        </th>
-                                                        <td class="text-muted">24 Nov 2021</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- end card body -->
-                                </div>
-                                <!-- end card -->
+
 
                             </div>
                             <!--end col-->
@@ -114,34 +72,14 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3">About</h5>
-                                        <p>
-                                            Hi I'm Anna Adame, It will be as simple as
-                                            Occidental; in fact, it will be Occidental. To
-                                            an English person, it will seem like simplified
-                                            English, as a skeptical Cambridge friend of mine
-                                            told me what Occidental is European languages
-                                            are members of the same family.
-                                        </p>
-                                        <p>
-                                            You always want to make sure that your fonts
-                                            work well together and try to limit the number
-                                            of fonts you use to three or less. Experiment
-                                            and play around with the fonts that you already
-                                            have in the software you’re working with
-                                            reputable font websites. This may be the most
-                                            commonly encountered tip I received from the
-                                            designers I spoke with. They highly encourage
-                                            that you use different fonts in one design, but
-                                            do not over-exaggerate and go overboard.
-                                        </p>
 
-                                        <!--end row-->
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt voluptas magni, impedit, et asperiores debitis corporis accusamus odit autem nobis error fugiat illo adipisci porro. Repudiandae sapiente consequuntur minus animi.</p>
+
+
                                     </div>
-                                    <!--end card-body-->
                                 </div>
-                                <!-- end card -->
 
-                                <!-- end card -->
+
                             </div>
                             <!--end col-->
                         </div>

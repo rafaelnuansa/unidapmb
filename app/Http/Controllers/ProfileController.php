@@ -2,44 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agama;
+use App\Models\UserAlamat;
+use App\Models\UserDetail;
+use App\Traits\CompletenessTrait;
 use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller
 {
 
+    use CompletenessTrait;
+
     public function index(Request $request)
     {
         $user = $request->user();
-
-        // Load the user's detail if available
-        $detail = $user->detail;
-
-        // Define the fields that contribute to completeness
-        $fields = [
-            'name', 'phone', 'nama_ibu', 'jenis_kelamin', 'tanggal_lahir',
-            'tempat_lahir', 'nisn', 'npwp', 'nik', 'agama_id', 'jalan',
-            'rt', 'rw', 'dusun', 'desa',
-        ];
+        $completeness = $this->calculateCompleteness($user->detail, $user->alamat);
 
         $recent_activity = $user->activities()
         ->latest()
-        ->take(5) // Adjust the number of recent activities you want to retrieve
+        ->take(5)
         ->get();
-
-        // Calculate completeness percentage
-        $completeness = $this->calculateCompleteness($detail, $fields);
 
 
         return view('profile.index', [
             'user' => $user,
-            'detail' => $detail,
+            'detail' => $user->detail,
             'completeness' => $completeness,
             'recent_activity' => $recent_activity,
         ]);
     }
-    /**
-     * Display the user profile.
-     */
+
     public function edit(Request $request)
     {
         $user = $request->user();
@@ -47,21 +40,18 @@ class ProfileController extends Controller
         // Load the user's biodata if available
         $detail = $user->detail;
         // Define the fields that contribute to completeness
-        $fields = [
-            'name', 'phone', 'nama_ibu', 'jenis_kelamin', 'tanggal_lahir',
-            'tempat_lahir', 'nisn', 'npwp', 'nik', 'agama_id', 'jalan',
-            'rt', 'rw', 'dusun', 'desa',
-        ];
-        $completeness = $this->calculateCompleteness($detail, $fields);
+        $completeness = $this->calculateCompleteness($user->detail, $user->alamat);
+
+        $agamas = Agama::all();
         return view('profile/edit', [
             'user' => $user,
             'detail' => $detail,
             'completeness' => $completeness,
+            'agamas' => $agamas,
         ]);
     }
-    /**
-     * Update the user profile.
-     */
+
+
     public function update(Request $request)
     {
         try {
@@ -75,7 +65,7 @@ class ProfileController extends Controller
 
                     'unique:users,phone,' . $user->id,
                 ],
-                'nama_ibu' => 'nullable|string|max:255',
+                'nama_ibu' => 'required|string|max:255',
                 'jenis_kelamin' => 'nullable|string|max:255',
                 'tanggal_lahir' => 'nullable|date', // Adjust based on your date format
                 'tempat_lahir' => 'nullable|string|max:255',
@@ -91,23 +81,37 @@ class ProfileController extends Controller
             ]);
 
             // Update user data
-            $user->update([
-                'name' => $request->name,
-                'phone' => $request->phone,
-            ]);
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->save();
 
-            // Update or create detail
-            $user->detail()->updateOrCreate([], $request->only([
-                'nama_ibu', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir',
-                'nisn', 'npwp', 'nik', 'agama_id', 'jalan', 'rt', 'rw', 'dusun', 'desa',
+            $detail = $user->detail ?? new UserDetail(); // Create new detail if it doesn't exist
+            $detail->fill($request->only([
+                'nama_ibu',
+                'jenis_kelamin',
+                'tanggal_lahir',
+                'tempat_lahir',
+                'nisn', 'npwp', 'nik', 'agama_id',
             ]));
+            $detail->user_id = auth()->user()->id;
+            $detail->save();
 
-            //   return response()->json(['message' => 'Update successfully']);
+            $alamat = $user->alamat ?? new UserAlamat(); // Create new detail if it doesn't exist
+            $alamat->fill($request->only([
+                'jalan',
+                'rt',
+                'rw',
+                'dusun',
+                'desa',
+            ]));
+            $alamat->user_id = auth()->user()->id;
+            $alamat->save();
+
 
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (ValidationException $e) {
 
-            //   return response()->json(['message' => $e->errors]);
+
             // If validation fails
             return redirect()->back()->with('error', $e->errors())->withInput();
         } catch (\Exception $e) {
@@ -116,20 +120,4 @@ class ProfileController extends Controller
         }
     }
 
-    private function calculateCompleteness($detail, $fields)
-    {
-        $filledFields = 0;
-        foreach ($fields as $field) {
-            // Check if the field is filled in the detail
-            if (!empty($detail->$field)) {
-                $filledFields++;
-            }
-        }
-
-        // Calculate percentage
-        $totalFields = count($fields);
-        $completeness = round(($filledFields / $totalFields) * 100);
-
-        return $completeness;
-    }
 }

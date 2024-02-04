@@ -17,31 +17,35 @@ class FakultasTableSeeder extends Seeder
          $fakultas = [
             [
                 'name' => 'Fakultas Pertanian',
-                'jenjang_id' => 1, // Assuming S1 jenjang_id is 1
+                'codename' => 'faperta',
             ],
             [
                 'name' => 'Fakultas Ilmu Pangan Halal',
-                'jenjang_id' => 1,
+                'codename' => 'fiphal',
             ],
             [
                 'name' => 'Fakultas Ekonomi',
-                'jenjang_id' => 1,
+                'codename' => 'fe',
             ],
             [
-                'name' => 'Fakultas Ilmu Sosial, Ilmu Politik, dan Ilmu Komputer',
-                'jenjang_id' => 1,
+                'name' => 'Fakultas Ilmu Sosial, Ilmu Politik',
+                'codename' => 'fisip',
             ],
             [
                 'name' => 'Fakultas Hukum',
-                'jenjang_id' => 1,
+                'codename' => 'fh',
             ],
             [
                 'name' => 'Fakultas Agama Islam dan Pendidikan Guru',
-                'jenjang_id' => 1,
+                'codename' => 'faipg',
+            ],
+            [
+                'name' => 'Fakultas Ilmu Komputer',
+                'codename' => 'filkom',
             ],
             [
                 'name' => 'Sekolah Pascasarjana',
-                'jenjang_id' => 2, // Assuming S2 jenjang_id is 2
+                'codename' => 'pascasarjana',
             ],
         ];
 

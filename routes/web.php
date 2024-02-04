@@ -13,7 +13,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::middleware('auth')->group(function () {
     // Route::middleware(['admin'])->group(function () {
-    Route::resource('users',  App\Http\Controllers\UserController::class);
+    Route::resource('admin/users',  App\Http\Controllers\UserController::class);
 
     Route::resource('admin/jenjang', App\Http\Controllers\Admin\JenjangController::class);
     Route::resource('admin/jurusan', App\Http\Controllers\Admin\JurusanController::class)->names('admin.jurusans');
@@ -33,15 +33,39 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/daftar', [App\Http\Controllers\DaftarController::class, 'index'])->name('daftar.index');
-    Route::get('/daftar/form', [App\Http\Controllers\DaftarController::class, 'form'])->name('daftar.form');
+    Route::get('/daftar/create', [App\Http\Controllers\DaftarController::class, 'form'])->name('daftar.form');
     Route::get('/daftar/{id}/edit', [App\Http\Controllers\DaftarController::class, 'edit'])->name('daftar.edit');
     Route::post('/daftar', [App\Http\Controllers\DaftarController::class, 'store'])->name('daftar.store');
     Route::get('/daftar/get-jenjang', [App\Http\Controllers\DaftarController::class, 'getJenjang'])->name('daftar.getJenjang');
     Route::get('/daftar/get-jurusan-by-jenjang', [App\Http\Controllers\DaftarController::class, 'getJurusanByJenjang'])->name('daftar.getJurusanByJenjang');
+
+    Route::get('pembayaran/{encryptRegistNumber}', [App\Http\Controllers\PembayaranController::class, 'pembayaran'])->name('pembayaran.pembayaran');
+
+
+    Route::get('formulir/{encryptRegistNumber}', [App\Http\Controllers\FormulirController::class, 'index'])->name('formulir.index');
+    Route::post('formulir/{encryptRegistNumber}', [App\Http\Controllers\FormulirController::class, 'biodata_store'])->name('formulir.biodata.store');
+
+    Route::get('formulir/{encryptRegistNumber}/alamat', [App\Http\Controllers\FormulirController::class, 'alamat'])->name('formulir.alamat');
+    Route::post('formulir/{encryptRegistNumber}/alamat', [App\Http\Controllers\FormulirController::class, 'alamat_store'])->name('formulir.alamat.store');
+
+    Route::get('formulir/{encryptRegistNumber}/kerja', [App\Http\Controllers\FormulirController::class, 'kerja'])->name('formulir.kerja');
+    Route::post('formulir/{encryptRegistNumber}/kerja', [App\Http\Controllers\FormulirController::class, 'kerja_store'])->name('formulir.kerja.store');
+
+    Route::get('formulir/{encryptRegistNumber}/ayah', [App\Http\Controllers\FormulirController::class, 'ayah'])->name('formulir.ayah');
+    Route::post('formulir/{encryptRegistNumber}/ayah', [App\Http\Controllers\FormulirController::class, 'ayah_store'])->name('formulir.ayah.store');
+
+    Route::get('formulir/{encryptRegistNumber}/ibu', [App\Http\Controllers\FormulirController::class, 'ibu'])->name('formulir.ibu');
+    Route::post('formulir/{encryptRegistNumber}/ibu', [App\Http\Controllers\FormulirController::class, 'ibu_store'])->name('formulir.ibu.store');
+
+    Route::get('formulir/{encryptRegistNumber}/wali', [App\Http\Controllers\FormulirController::class, 'wali'])->name('formulir.wali');
+    Route::post('formulir/{encryptRegistNumber}/wali', [App\Http\Controllers\FormulirController::class, 'wali_store'])->name('formulir.wali.store');
+
+    Route::get('formulir/{encryptRegistNumber}/lampiran', [App\Http\Controllers\FormulirController::class, 'lampiran'])->name('formulir.lampiran');
+    Route::post('formulir/{encryptRegistNumber}/lampiran', [App\Http\Controllers\FormulirController::class, 'lampiran_store'])->name('formulir.lampiran.store');
 });
 
 require __DIR__ . '/auth.php';

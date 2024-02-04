@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap);
 @font-face {
     font-family: hkgrotesk;
     src: url(../fonts/hkgrotesk-light.eot);
@@ -594,7 +594,7 @@
     white-space: none;
     position: relative;
     font-size: 0.813rem;
-    font-family: Poppins, sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 .navbar-menu .navbar-nav .nav-sm .nav-link:before {
     content: "";
@@ -2592,10 +2592,10 @@
     }
 } /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
     position: relative;
@@ -4626,7 +4626,7 @@ html {
     min-height: 100%;
 }
 :is(.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6) {
-    font-family: Poppins, sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 label {
     font-weight: 500;
@@ -10483,7 +10483,7 @@ button.gridjs-sort-desc {
 }
 .leaflet-map.leaflet-container {
     z-index: 0;
-    font-family: Poppins, sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 .fc td,
 .fc th {

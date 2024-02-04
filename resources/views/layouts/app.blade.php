@@ -19,6 +19,9 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     @stack('styles')
+
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>

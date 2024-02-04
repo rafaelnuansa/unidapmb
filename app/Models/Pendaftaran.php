@@ -35,4 +35,9 @@ class Pendaftaran extends Model
     {
         return $this->belongsTo(Jurusan::class, 'jurusan_3_id');
     }
+
+    public function jenjang()
+    {
+        return $this->belongsTo(Jenjang::class);
+    }
 }

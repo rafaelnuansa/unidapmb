@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<form action="{{ route('daftar.store') }}" method="post">
+    @csrf
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -17,7 +19,6 @@
         </div>
     </div>
 
-    {{-- ambil dari getJenjang route('daftar.getJenjang') --}}
     <div class="row mt-3">
         <div class="col-lg-12">
             <div class="card mb-3">
@@ -25,7 +26,7 @@
                     <div class="alert alert-success">
                         <h5 class="alert-heading">{{ $periodeAktif->name }}</h5>
                         <ul class="list-unstyled mb-0">
-                            {{-- <li><strong>Tanggal Mulai:</strong> {{ $periodeAktif->start_date }}</li> --}}
+                            <li><strong>Tanggal Mulai:</strong> {{ $periodeAktif->start_date }}</li>
                             <li><strong>Tanggal Berakhir:</strong> {{ $periodeAktif->end_date }}</li>
                         </ul>
                     </div>
@@ -34,12 +35,11 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Form Pendaftaran</h4>
-                    <form action="{{ route('daftar.store') }}" method="post">
-                        @csrf <!-- Tambahkan ini untuk token CSRF -->
+
                         <div class="mb-3">
                             <label for="jenjang_id" class="form-label">Pilih Jenjang</label>
                             <select id="jenjang_id" name="jenjang_id" class="form-select">
-                                <!-- Opsi Jenjang -->   <option value="">Pilih Jenjang Pendidikan</option>
+                                <option value="" disabled selected>Pilih Jenjang/Program</option>
                             </select>
                         </div>
 
@@ -89,26 +89,30 @@
                         </div>
 
                         <div class="mb-3"><button type="submit" class="btn btn-primary">Submit</button></div>
-                    </form>
+
                 </div>
             </div>
         </div>
     </div>
+</form>
 @endsection
-
 
 @push('scripts')
     <script>
         // Script untuk mengisi opsi jenjang dan jurusan
         $(document).ready(function() {
+            var jenjangSelect = $('#jenjang_id');
+            // Set the default option when the form is first loaded
+            jenjangSelect.append('<option value="" disabled selected>Pilih Jenjang/Program</option>');
+
             // Ambil data jenjang dari controller menggunakan AJAX
             $.ajax({
                 url: "{{ route('daftar.getJenjang') }}",
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    var jenjangSelect = $('#jenjang_id');
-                    jenjangSelect.empty(); // Kosongkan opsi jenjang
+                    // Kosongkan opsi jenjang
+                    jenjangSelect.empty();
 
                     // Tambahkan opsi jenjang ke dalam dropdown
                     if (data.data.length > 0) {
@@ -174,9 +178,11 @@
                         // Handle jika tidak ada jenjang
                         jenjangSelect.append(
                             '<option value="" disabled selected>Data tidak tersedia</option>');
-
                     }
                 }
+            }).done(function() {
+                // Trigger change event after options are loaded to ensure the default option is selected
+                jenjangSelect.change();
             });
         });
     </script>

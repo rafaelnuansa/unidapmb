@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fakultas', function (Blueprint $table) {
+        Schema::create('user_lampirans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('codename');
-
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->comment('reference users');
+            $table->string('foto')->nullable();
+            $table->string('ktp')->nullable();
+            $table->date('ijazah')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fakultas');
+        Schema::dropIfExists('user_data_walis');
     }
 };

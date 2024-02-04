@@ -56,10 +56,12 @@
                         <table id="dataTable" class="table align-middle table-nowrap mb-0">
                             <thead class="table-light text-muted">
                                 <tr>
-                                    <th style="width: 10%;">No.</th>
+
                                     <th>Registration Number</th>
                                     <th>Periode</th>
-                                    <th>Jurusan Pilihan</th>
+                                    <th>Program</th>
+
+
                                     <th scope="col">Kelas</th>
                                     <th scope="col">Tanggal</th>
                                     <th>Status</th>
@@ -69,21 +71,15 @@
                             <tbody>
                                 @foreach ($registrations as $index => $registration)
                                     <tr>
-                                        <td class="text-center">{{ $index + 1 }}</td>
                                         <td><b>{{ $registration->nomor_registrasi }}</b></td>
                                         <td><b>{{ $registration->periode->name }}</b></td>
-                                        <td>
-                                            <ul>
-                                                <li>{{ $registration->jurusan1->name }}</li>
-                                                <li>{{ $registration->jurusan2->name }}</li>
-                                                <li>{{ $registration->jurusan3->name }}</li>
-                                            </ul>
-                                        </td>
+                                        <td><b>{{ $registration->jenjang->name }}</b></td>
+
                                         <td>{{ $registration->kelas->name }}</td>
                                         <td>{{ $registration->created_at->format('d F Y') }}</td>
-                                        <td>{{ $registration->is_verified ? 'Terverifikasi' : 'Belum Terverifikasi' }}</td>
+                                        <td><span class="badge bg-secondary">{{ $registration->status  }}</span></td>
                                         <td class="text-center">
-                                       <a class="btn btn-danger">Cancel</a>
+                                         <a href="{{ route('formulir.index' , encrypt($registration->nomor_registrasi))}}" class="btn btn-danger btn-sm">Formulir</a>
                                         </td>
                                     </tr>
                                 @endforeach

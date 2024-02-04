@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->comment('reference users');
-
             $table->string('jenis_kelamin')->nullable();
             $table->string('tanggal_lahir')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -23,12 +22,16 @@ return new class extends Migration
             $table->string('nisn')->nullable();
             $table->string('npwp')->nullable();
             $table->string('nik')->nullable();
-            $table->string('agama_id')->nullable();
-            $table->string('jalan')->nullable();
-            $table->string('rt')->nullable();
-            $table->string('rw')->nullable();
-            $table->string('dusun')->nullable();
-            $table->string('desa')->nullable();
+
+            $table->unsignedBigInteger('agama_id')->nullable();
+
+            $table->unsignedBigInteger('jenis_tinggal_id')->nullable();
+            $table->unsignedBigInteger('kewarganegaraan')->nullable();
+            $table->unsignedBigInteger('pendidikan_terkahir_id')->nullable();
+
+
+            $table->enum('status_nikah', ['sudah', 'belum'])->nullable();
+            $table->unsignedBigInteger('sumber_info_id', ['sudah', 'belum'])->nullable();
 
             $table->tinyInteger('step')->default(0);
             $table->boolean('is_beasiswa')->default(false);

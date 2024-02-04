@@ -47,6 +47,42 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id');
     }
 
+    public function alamat(): HasOne
+    {
+        return $this->hasOne(UserAlamat::class, 'user_id');
+    }
+
+
+    public function asal_sekolah(): HasOne
+    {
+        return $this->hasOne(UserAsalSekolah::class, 'user_id');
+    }
+
+    public function ayah(): HasOne
+    {
+        return $this->hasOne(UserDataAyah::class, 'user_id');
+    }
+
+    public function ibu(): HasOne
+    {
+        return $this->hasOne(UserDataIbu::class, 'user_id');
+    }
+
+    public function wali(): HasOne
+    {
+        return $this->hasOne(UserDataWali::class, 'user_id');
+    }
+
+    public function kerja(): HasOne
+    {
+        return $this->hasOne(UserStatusKerja::class, 'user_id');
+    }
+
+    public function lampiran(): HasOne
+    {
+        return $this->hasOne(UserLampiran::class, 'user_id');
+    }
+
     public function activities(): HasMany
     {
         return $this->hasMany(UserActivity::class);

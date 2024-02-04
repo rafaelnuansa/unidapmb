@@ -9,28 +9,23 @@ use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use App\Models\Pendaftaran; // Make sure to import the Pendaftaran model
+use App\Traits\CompletenessTrait;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 
 class DaftarController extends Controller
 {
 
+    Use CompletenessTrait;
+
     public function index(Request $request)
     {
         $query = Pendaftaran::orderBy('created_at', 'desc');
 
-        // Define the fields that contribute to completeness
-        $fields = [
-            'name', 'phone', 'nama_ibu', 'jenis_kelamin', 'tanggal_lahir',
-            'tempat_lahir', 'nisn', 'npwp', 'nik', 'agama_id', 'jalan',
-            'rt', 'rw', 'dusun', 'desa',
-        ];
+
 
         $user = $request->user();
-
-        // Load the user's detail if available
-        $user_detail = $user->detail;
-        // Calculate completeness percentage for the registration
-        $completeness = $this->calculateCompleteness($user_detail, $fields);
+        $completeness = $this->calculateCompleteness($user->detail, $user->alamat );
 
         // If completeness is less than 80%, redirect to dashboard with an error message
         if ($completeness < 80) {
@@ -49,22 +44,41 @@ class DaftarController extends Controller
             $query->whereBetween('created_at', [$start_date, $end_date]);
         }
 
-        // Anda dapat menambahkan filter berdasarkan kolom lain sesuai kebutuhan
 
         $registrations = $query->paginate(10);
-
         return view('daftar.index', compact('registrations'));
     }
 
 
-    public function form()
+    public function form(Request $request)
     {
+
+        $currentDate = Carbon::now();
+        $periodeAktif = Periode::whereDate('start_date', '<=', $currentDate)
+            ->whereDate('end_date', '>=', $currentDate)
+            ->first();
+
+        if (!$periodeAktif) {
+            return redirect()->route('dashboard')->with('error', 'Tidak ada periode aktif saat ini.');
+        }
+
         $jurusan = Jurusan::all();
         $kelas = Kelas::all();
         $beasiswa = Beasiswa::all();
 
-        // Ambil data periode aktif
-        $periodeAktif = Periode::where('is_active', true)->first();
+        $user = $request->user();
+        $completeness = $this->calculateCompleteness($user->detail, $user->alamat );
+
+        $existingRegistration = Pendaftaran::where('user_id', $user->id)
+        ->where('status', 'pending')
+        ->first();
+
+        if ($completeness < 80) {
+            return redirect()->route('dashboard')->with('error', 'Harap lengkapi data profile sebelum melakukan pendaftaran.');
+        }
+        if ($existingRegistration) {
+            return redirect()->route('daftar.index')->with('warning', 'Data Registrasi anda masih dalam peninjauan.');
+        }
 
         return view('daftar.form', compact('jurusan', 'kelas', 'beasiswa', 'periodeAktif'));
     }
@@ -72,7 +86,7 @@ class DaftarController extends Controller
 
     public function getJenjang()
     {
-        $jenjang = Jenjang::with('fakultas.jurusans')->get();
+        $jenjang = Jenjang::with('jurusans')->get();
 
         return response()->json([
             'data' => $jenjang,
@@ -96,13 +110,11 @@ class DaftarController extends Controller
             $request->validate([
                 'jenjang_id' => 'required',
                 'jurusan_1_id' => 'required',
-                'jurusan_2_id' => 'required|different:jurusan_1_id',
-                'jurusan_3_id' => 'required|different:jurusan_1_id,different:jurusan_2_id',
+                'jurusan_2_id' => 'required',
+                'jurusan_3_id' => 'required',
                 'kelas_id' => 'required',
                 'beasiswa_id' => 'nullable',
-            ], [
-                'jurusan_3_id.different' => 'Pilihan Jurusan 3 harus berbeda dengan Pilihan Jurusan 1 dan Pilihan Jurusan 2.',
-            ]);
+            ], );
 
             // Ambil data pendaftaran dari formulir
             $data = $request->only([
@@ -117,17 +129,19 @@ class DaftarController extends Controller
             // Tambahkan data tambahan ke array
             $data['user_id'] = auth()->user()->id; // ID pengguna yang sedang login
             $data['nomor_registrasi'] = 'REG-' . time(); // Nomor registrasi unik berdasarkan timestamp
-
+            $currentDate = Carbon::now();
             // Ambil periode aktif
-            $periode = Periode::where('is_active', true)->first();
+            $periodeAktif = Periode::whereDate('start_date', '<=', $currentDate)
+            ->whereDate('end_date', '>=', $currentDate)
+            ->first();
 
-            if (!$periode) {
+            if (!$periodeAktif) {
                 // Jika periode aktif tidak ditemukan, Anda dapat mengambil tindakan tertentu
                 return redirect()->back()->with('error', 'Periode aktif tidak ditemukan.');
             }
 
             // Sesuaikan data periode_id dengan periode yang aktif
-            $data['periode_id'] = $periode->id;
+            $data['periode_id'] = $periodeAktif->id;
 
             // Simpan data pendaftaran ke database
             Pendaftaran::create($data);
@@ -165,21 +179,4 @@ class DaftarController extends Controller
         }
     }
 
-    private function calculateCompleteness($detail, $fields)
-    {
-        $filledFields = 0;
-
-        foreach ($fields as $field) {
-            // Check if the field is filled in the detail
-            if (!empty($detail->$field)) {
-                $filledFields++;
-            }
-        }
-
-        // Calculate percentage
-        $totalFields = count($fields);
-        $completeness = round(($filledFields / $totalFields) * 100);
-
-        return $completeness;
-    }
 }
