@@ -36,17 +36,18 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="fas fa-tachometer-alt"></i>
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('daftar.*') ? 'active' : '' }}" href="{{ route('daftar.index') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="fas fa-user-plus"></i>
                         <span data-key="t-dashboard">Registrasi</span>
                     </a>
                 </li>
+
 
 
             </ul>

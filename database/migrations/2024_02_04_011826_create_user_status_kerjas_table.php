@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_status_kerjas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->comment('reference users');
-            $table->enum('status_kerja', ['ya', 'tidak'])->nullable();
+            $table->boolean('status_kerja')->nullable();
             $table->string('nama_instansi')->nullable();
             $table->text('alamat_kerja')->nullable();
             $table->string('kota_kerja')->nullable();
