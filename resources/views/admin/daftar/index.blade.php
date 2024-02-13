@@ -18,6 +18,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nomor Registrasi</th>
+                                <th>Pendaftar</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
@@ -28,6 +29,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="fw-bold">{{ $registration->nomor_registrasi }}</td>
+                                    <td class="fw-bold">{{ $registration->user->name }}</td>
                                     <td>{{ $registration->status }}</td>
                                     <td>{{ $registration->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>

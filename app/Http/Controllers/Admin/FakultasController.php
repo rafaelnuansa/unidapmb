@@ -16,20 +16,18 @@ class FakultasController extends Controller
 
     public function create()
     {
-        $jenjangs = Jenjang::all();
-        return view('admin.fakultas.create', compact('jenjangs'));
+         return view('admin.fakultas.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'jenjang_id' => 'required|exists:jenjangs,id',
+            'codename' => 'required|string|unique:fakultas',
         ]);
 
         Fakultas::create([
             'name' => $request->input('name'),
-            'jenjang_id' => $request->input('jenjang_id'),
         ]);
 
         return redirect()->route('fakultas.index')->with('success', 'Fakultas created successfully.');
@@ -37,24 +35,24 @@ class FakultasController extends Controller
 
     public function edit(Fakultas $fakultas)
     {
-        $jenjangs = Jenjang::all();
-        return view('admin.fakultas.edit', compact('fakultas', 'jenjangs'));
+        return view('admin.fakultas.edit', compact('fakultas', ));
     }
 
     public function update(Request $request, Fakultas $fakultas)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'jenjang_id' => 'required|exists:jenjangs,id',
+            'codename' => 'required|string|unique:fakultas,codename,' . $fakultas->id,
         ]);
 
         $fakultas->update([
             'name' => $request->input('name'),
-            'jenjang_id' => $request->input('jenjang_id'),
+            'codename' => $request->input('codename'),
         ]);
 
         return redirect()->route('fakultas.index')->with('success', 'Fakultas updated successfully.');
     }
+
 
     public function destroy(Fakultas $fakultas)
     {

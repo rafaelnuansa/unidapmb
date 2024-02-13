@@ -511,7 +511,7 @@
     padding: 0.625rem 1.5rem;
     color: var(--vz-vertical-menu-item-color);
     font-size: 0.9375rem;
-    font-family: hkgrotesk, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 .navbar-menu .navbar-nav .nav-link.active {
     color: var(--vz-vertical-menu-item-active-color);
@@ -3197,7 +3197,7 @@
     font-family: var(--vz-font-sans-serif);
 }
 .ff-secondary {
-    font-family: hkgrotesk, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 .bg-pattern {
     background: url(../images/modal-bg.png) var(--vz-secondary-bg);
@@ -14496,7 +14496,7 @@ span.flatpickr-weekday {
     color: var(--vz-body-color);
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
-    font-family: hkgrotesk, sans-serif;
+    font-family: Poppins, sans-serif;
     font-weight: 500;
     font-size: 0.8125rem;
 }
@@ -14552,7 +14552,7 @@ span.flatpickr-weekday {
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
     color: var(--vz-body-color);
-    font-family: hkgrotesk, sans-serif;
+    font-family: Poppins, sans-serif;
     font-weight: 500;
     font-size: 0.8125rem;
 }
@@ -15546,7 +15546,7 @@ span.flatpickr-weekday {
     font-weight: 500;
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
-    font-family: hkgrotesk, sans-serif;
+    font-family: Poppins, sans-serif;
     color: var(--vz-body-color);
     padding: 14px;
 }
