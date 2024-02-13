@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-lg-4 order-1 order-lg-2">
-                <img src="{{ asset('themes/heroslide.png') }}" class="img-fluid" alt="" data-aos="zoom-out"
+                <img src="{{ asset('heroslide.png') }}" class="img-fluid" alt="" data-aos="zoom-out"
                     data-aos-delay="100">
             </div>
         </div>

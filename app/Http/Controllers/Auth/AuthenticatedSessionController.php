@@ -41,19 +41,22 @@ class AuthenticatedSessionController extends Controller
     //     $request->session()->regenerate();
     //     return redirect()->intended(RouteServiceProvider::HOME);
     // }
-
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-        $request->session()->regenerate();
-
-        // Check if the authenticated user is an admin
-        if (auth()->user()->is_admin) {
-            return redirect()->intended(route('admin.dashboard'));
-        } else {
-            return redirect()->intended(route('dashboard'));
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
+            if (auth()->user()->is_admin) {
+                return redirect()->intended(route('admin.dashboard'));
+            } else {
+                return redirect()->intended(route('dashboard'));
+            }
+        } catch (AuthenticationException $e) {
+            // Handle authentication exceptions here
+            return redirect()->back()->with('error', 'Failed to authenticate. Please check your credentials.');
         }
     }
+
 
     /**
      * Destroy an authenticated session.

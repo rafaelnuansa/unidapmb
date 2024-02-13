@@ -1,13 +1,19 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RestrictedController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-Route::get('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('index');
-Route::get('/access_denied', [RestrictedController::class, 'accessDenied'])->name('restricted');
+Route::get('/', [App\Http\Controllers\Landing\HomeController::class, 'index'])->name('landing.home.index');
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('login.store');
+
+
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register');
+
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+// Route::get('/access_denied', [RestrictedController::class, 'accessDenied'])->name('restricted');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 
@@ -55,5 +61,5 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
