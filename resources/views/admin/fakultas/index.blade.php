@@ -15,32 +15,38 @@
                         </div>
                     @endif
 
-                    <div class="table-responsive">
+                    <div class="table-responsive table-card">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Name</th>
-                                    <th>Jenjang</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($fakultasList as $fakultas)
                                     <tr>
-                                        <td>{{ $fakultas->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $fakultas->name }}</td>
-                                        <td>{{ $fakultas->jenjang->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.fakultas.edit', $fakultas->id) }}"
-                                                class="btn btn-warning">Edit</a>
-                                            <form action="{{ route('admin.fakultas.destroy', $fakultas->id) }}" method="POST"
-                                                style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <li><a class="dropdown-item" href="{{ route('admin.fakultas.edit', $fakultas->id) }}">Edit</a></li>
+                                                    <li>
+                                                        <form action="{{ route('admin.fakultas.destroy', $fakultas->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure?')">Delete</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @empty

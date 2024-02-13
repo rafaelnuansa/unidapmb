@@ -110,11 +110,11 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label class="form-label">Agama</label>
-                                <select class="form-select" id="agama" name="agama">
+                                <label class="form-label">Agama {{ $user->detail->agama_id }}</label>
+                                <select class="form-select" id="agama" name="agama_id">
                                     <option value="" disabled selected>Select Agama</option>
                                     @foreach($agamas as $agama)
-                                        <option value="{{ $agama }}" @if(old('agama', optional($user->detail)->agama) == $agama) selected @endif>{{ $agama->name }}</option>
+                                        <option value="{{ $agama->id }}" @if(old('agama', optional($user->detail)->agama_id) == $agama->id) selected @endif>{{ $agama->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

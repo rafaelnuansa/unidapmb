@@ -16,6 +16,11 @@ class Pendaftaran extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function periode()
     {
         return $this->belongsTo(Periode::class, 'periode_id');

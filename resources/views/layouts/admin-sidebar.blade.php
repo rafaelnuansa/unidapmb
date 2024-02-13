@@ -5,10 +5,10 @@
         <!-- Dark Logo-->
         <a href="{{ route('dashboard') }}" class="logo logo-dark">
             <span class="logo-sm">
-                <h2 class="text-primary fw-bold  mt-3"> {{ __('PMB') }}</h2>
+                <h4 class="text-primary fw-bold  mt-3"> {{ __('PMB') }}</h4>
             </span>
             <span class="logo-lg">
-                <h2 class="text-primary fw-bold  mt-3"> {{ __('PMB ONLINE') }}</h2>
+                <h4 class="text-primary fw-bold  mt-3"> {{ __('Penerimaan Mahasiswa Baru') }}</h4>
             </span>
         </a>
         <!-- Light Logo-->
@@ -17,7 +17,7 @@
                 <h4 class="text-white fw-bold mt-3"> {{ __('PMB') }}</h4>
             </span>
             <span class="logo-lg">
-                <h4 class="text-white fw-bold mt-3"> {{ __('PMB ONLINE') }}</h4>
+                <h4 class="text-white fw-bold mt-3"> {{ __('Penerimaan Mahasiswa Baru') }}</h4>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -36,43 +36,41 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="mdi mdi-view-dashboard"></i>
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('admin.daftar.*') ? 'active' : '' }}" href="{{ route('admin.daftar.index') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="mdi mdi-account-group"></i>
                         <span data-key="t-dashboard">Data Registrasi</span>
                     </a>
                 </li>
 
-
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('admin.kelas.*') ? 'active' : '' }}" href="{{ route('admin.kelas.index') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="mdi mdi-school"></i>
                         <span data-key="t-dashboard">Kelas</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('admin.fakultas.*') ? 'active' : '' }}" href="{{ route('admin.fakultas.index') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="mdi mdi-domain"></i>
                         <span data-key="t-dashboard">Fakultas</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::is('admin.jurusans.*') ? 'active' : '' }}" href="{{ route('admin.jurusans.index') }}">
-                        <i class="bx bxs-dashboard"></i>
+                        <i class="mdi mdi-book"></i>
                         <span data-key="t-dashboard">Jurusan</span>
                     </a>
                 </li>
-
-
             </ul>
-        </div>
 
-        <!-- Sidebar -->
+        </div>
     </div>
 
     <div class="sidebar-background"></div>

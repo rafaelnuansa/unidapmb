@@ -17,19 +17,18 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+
+        // Load the user's biodata if available
+        $detail = $user->detail;
+        // Define the fields that contribute to completeness
         $completeness = $this->calculateCompleteness($user->detail, $user->alamat);
 
-        $recent_activity = $user->activities()
-        ->latest()
-        ->take(5)
-        ->get();
-
-
-        return view('profile.index', [
+        $agamas = Agama::all();
+        return view('profile/edit', [
             'user' => $user,
-            'detail' => $user->detail,
+            'detail' => $detail,
             'completeness' => $completeness,
-            'recent_activity' => $recent_activity,
+            'agamas' => $agamas,
         ]);
     }
 
@@ -72,7 +71,7 @@ class ProfileController extends Controller
                 'nisn' => 'nullable|string|max:255',
                 'npwp' => 'nullable|string|max:255',
                 'nik' => 'nullable|string|max:255',
-                'agama_id' => 'nullable|string|max:255',
+                'agama_id' => 'required|numeric|max:255',
                 'jalan' => 'nullable|string|max:255',
                 'rt' => 'nullable|string|max:255',
                 'rw' => 'nullable|string|max:255',

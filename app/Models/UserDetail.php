@@ -12,4 +12,9 @@ class UserDetail extends Model
     protected $guarded = ['id'];
 
 
+    public function agama()
+    {
+        return $this->belongsTo(Agama::class, 'agama_id');
+    }
+
 }

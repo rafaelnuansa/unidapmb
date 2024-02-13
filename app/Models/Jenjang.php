@@ -11,7 +11,6 @@ class Jenjang extends Model
 
     protected $guarded = ['id'];
 
-
     public function jurusans()
     {
         return $this->hasMany(Jurusan::class );

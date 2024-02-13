@@ -11,7 +11,7 @@ class DaftarController extends Controller
     public function index()
     {
         // Retrieve unprocessed registrations
-        $registrations = Pendaftaran::where('status', 'pending')->paginate(10);
+        $registrations = Pendaftaran::latest()->paginate(10);
 
         return view('admin.daftar.index', compact('registrations'));
     }
@@ -20,7 +20,6 @@ class DaftarController extends Controller
     {
         // Retrieve a specific registration for detailed view
         $registration = Pendaftaran::findOrFail($id);
-
         return view('admin.daftar.show', compact('registration'));
     }
 

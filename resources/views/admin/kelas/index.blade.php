@@ -6,8 +6,8 @@
 <div class="row">
 
     <div class="col-12">
-        <h2 class="mb-4">Kelas List</h2>
         <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary mb-3">Add New Kelas</a>
+
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -17,11 +17,11 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="table-responsive">
+                <div class="table-responsive table-card">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Actions</th>
@@ -30,19 +30,27 @@
                         <tbody>
                             @forelse ($classes as $class)
                                 <tr>
-                                    <td>{{ $class->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $class->code }}</td>
                                     <td>{{ $class->name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.kelas.edit', $class->id) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('admin.kelas.destroy', $class->id) }}" method="POST"
-                                            style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="{{ route('admin.kelas.edit', $class->id) }}">Edit</a></li>
+                                                <li>
+                                                    <form action="{{ route('admin.kelas.destroy', $class->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure?')">Delete</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                     </td>
                                 </tr>
                             @empty

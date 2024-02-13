@@ -30,11 +30,7 @@
                                 </span>
 
                                 <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">
-                                    @if (Auth::check() && Auth::user()->is_admin)
-                                        Admin
-                                    @else
-                                        Users
-                                    @endif
+                                    {{ auth()->user()->email }}
                                 </span>
 
 

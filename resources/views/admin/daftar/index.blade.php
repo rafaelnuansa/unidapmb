@@ -8,10 +8,11 @@
                 {{ session('success') }}
             </div>
         @endif
-        <div class="card">
+        <div class="card card-animate">
+            <div class="card-header">Data Pendaftar</div>
             <div class="card-body">
 
-                <div class="table-responsive">
+                <div class="table-responsive table-card">
                     <table class="table">
                         <thead>
                             <tr>
@@ -30,95 +31,29 @@
                                     <td>{{ $registration->status }}</td>
                                     <td>{{ $registration->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
-                                        <!-- Add action buttons (e.g., view, edit, delete) based on your requirements -->
-                                        <!-- For example: -->
-                                        <a href="{{ route('admin.daftar.show', $registration->id) }}"
-                                            class="btn btn-primary">View</a>
-                                        {{-- <a href="{{ route('admin.daftar.edit', $registration->id) }}"
-                                            class="btn btn-warning">Edit</a> --}}
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#verificationModal{{ $registration->id }}">Verify</button>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#rejectionModal{{ $registration->id }}">Reject</button>
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#cancellationModal{{ $registration->id }}">Cancel</button>
-                                        <!-- You can add more actions based on your needs -->
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="{{ route('admin.daftar.show', $registration->id) }}">View</a></li>
+                                                <!-- Uncomment below lines to include Edit action -->
+                                                <!-- <li><a class="dropdown-item" href="{{ route('admin.daftar.edit', $registration->id) }}">Edit</a></li> -->
+                                                <li><button class="dropdown-item btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#verificationModal{{ $registration->id }}">Verify</button></li>
+                                                <li><button class="dropdown-item btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#rejectionModal{{ $registration->id }}">Reject</button></li>
+                                                <li><button class="dropdown-item btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#cancellationModal{{ $registration->id }}">Cancel</button></li>
+                                                <!-- You can add more actions based on your needs -->
+                                            </ul>
+                                        </div>
+
                                     </td>
                                 </tr>
 
-                                <!-- Verification Modal -->
-                                <div class="modal fade" id="verificationModal{{ $registration->id }}" tabindex="-1"
-                                    aria-labelledby="verificationModalLabel{{ $registration->id }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="verificationModalLabel{{ $registration->id }}">
-                                                    Verification Confirmation</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to verify this registration?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                {{-- <a href="{{ route('admin.daftar.verify', $registration->id) }}"
-                                            class="btn btn-success">Verify</a> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-
-                                <!-- Rejection Modal -->
-
-                                <div class="modal fade" id="rejectionModal{{ $registration->id }}" tabindex="-1"
-                                    aria-labelledby="rejectionModalLabel{{ $registration->id }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="rejectionModalLabel{{ $registration->id }}">
-                                                    Rejection
-                                                    Confirmation</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to reject this registration?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                {{-- <a href="{{ route('admin.daftar.reject', $registration->id) }}" class="btn btn-danger">Reject</a> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Cancellation Modal -->
-                                <div class="modal fade" id="cancellationModal{{ $registration->id }}" tabindex="-1"
-                                    aria-labelledby="cancellationModalLabel{{ $registration->id }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="rejectionModalLabel{{ $registration->id }}">
-                                                    Rejection
-                                                    Confirmation</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to reject this registration?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                {{-- <a href="{{ route('admin.daftar.reject', $registration->id) }}" class="btn btn-danger">Reject</a> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             @empty
                                 <tr>
                                     <td colspan="5">No registrations found.</td>
@@ -127,6 +62,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="card-footer">
+                {{ $registrations->links() }}
             </div>
         </div>
     </div>

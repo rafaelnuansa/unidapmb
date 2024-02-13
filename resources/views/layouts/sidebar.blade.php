@@ -5,10 +5,10 @@
         <!-- Dark Logo-->
         <a href="{{ route('dashboard') }}" class="logo logo-dark">
             <span class="logo-sm">
-                <h2 class="text-primary fw-bold  mt-3"> {{ __('PMB') }}</h2>
+                <h4 class="text-primary fw-bold  mt-3"> {{ __('PMB') }}</h4>
             </span>
             <span class="logo-lg">
-                <h2 class="text-primary fw-bold  mt-3"> {{ __('PMB ONLINE') }}</h2>
+                <h4 class="text-primary fw-bold  mt-3"> {{ __('Penerimaan Mahasiswa Baru') }}</h4>
             </span>
         </a>
         <!-- Light Logo-->

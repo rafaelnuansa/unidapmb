@@ -13,22 +13,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::middleware('auth')->group(function () {
     // Route::middleware(['admin'])->group(function () {
-    Route::resource('admin/users',  App\Http\Controllers\UserController::class);
 
-    Route::resource('admin/jenjang', App\Http\Controllers\Admin\JenjangController::class);
-    Route::resource('admin/jurusan', App\Http\Controllers\Admin\JurusanController::class)->names('admin.jurusans');
-    Route::get('admin/dashboard', App\Http\Controllers\Admin\DashboardController::class)->name('admin.dashboard');
-    Route::resource('admin/daftar', App\Http\Controllers\Admin\DaftarController::class)->names('admin.daftar');
-    Route::resource('admin/fakultas', App\Http\Controllers\Admin\FakultasController::class, [
-        'parameters' => [
-        'fakultas' => 'fakultas',
-    ],])->names('admin.fakultas');
-
-    Route::resource('admin/kelas', App\Http\Controllers\Admin\KelasController::class, [
-        'parameters' => [
-        'kelas' => 'kelas',
-    ],])->names('admin.kelas');
-    //
 
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
@@ -68,4 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('formulir/{encryptRegistNumber}/lampiran', [App\Http\Controllers\FormulirController::class, 'lampiran_store'])->name('formulir.lampiran.store');
 });
 
+
+
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
